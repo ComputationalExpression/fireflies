@@ -1,0 +1,87 @@
+name: Code Review
+description: A code review conducted with a Technical Leader (TL) or the course instructor.
+title: "Code Review: Lab 3, Fireflies at Bousson"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill this out with the programmer present. Leave a box unchecked when the work does
+        not meet it. An unchecked box is information, not a punishment.
+  - type: input
+    attributes:
+      label: Reviewer
+      description: The GitHub username of the TL or instructor conducting this review
+      placeholder: your-github-username
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Functional requirements
+      description: Check each of the following satisfied functional requirements
+      options:
+        - label: "Code solves the issue presented"
+        - label: "Code functions, even if not fully solving the issue presented"
+        - label: "Performance of the code is acceptable"
+  - type: checkboxes
+    attributes:
+      label: Code style and legibility
+      description: Check each of the following checkboxes that describe code legibility
+      options:
+        - label: The code contains comments
+        - label: Variable names are accurate and appropriate
+        - label: The code is easy to read
+        - label: The code is formatted correctly
+  - type: markdown
+    attributes:
+      value: |
+        Walk through the code with the author, with the program running on their Pico. **Ask one
+        question per concept below, in your own words, about their own code.** Reviews happen at a
+        table where other students can hear, so vary the question from student to student: the
+        concept stays the same, the question does not. Pick from these or make up your own.
+
+        **Counted repetition (Stage One)**
+        - Run it with `3`. What does the loop variable hold on the last trip, and what would it hold with `range(flashes)` instead?
+        - Point to the line that turns the lantern on. What happens if you un-indent it one level?
+        - Type `15`. Which line decided that only ten flashes happen, and did it run before or after the loop?
+
+        **Loop until a condition (Stage Two)**
+        - Run it with `20`. How many trips, and which line decided that?
+        - Delete the subtraction in your head. What does the program do with a reading of `50`?
+        - Why is this a `while` and not a `for`? What would you need to know to write it as a `for`?
+
+        **A decision inside a loop (Stage Three)**
+        - Run it with `7`. Which flash numbers took the `if` branch, and what did `% 3` give on each of those?
+        - Where is `long_flashes` set to zero, and what would change if that line were inside the loop?
+        - Change one character so every second flash is held long instead. Which character?
+
+        **A loop inside a loop (Stage Four)**
+        - Run it with `2`. How many times did the lantern come on, and how did you count that from the code?
+        - Un-indent the last letter loop in your head. How many short flashes does one repeat send now?
+        - Which `time.sleep` is the pause between letters, and which is the pause between repeats? How can you tell from the code alone?
+
+        Check a concept when the answer shows the understanding described, whichever question you asked.
+  - type: checkboxes
+    attributes:
+      label: Code walkthrough
+      description: One box per concept. Check it when the author's answer to your question showed the understanding described.
+      options:
+        - label: "Counted repetition: the author can say what range hands the loop on each trip, and point to the line that has to be inside the loop for the lantern to flash once per trip"
+        - label: "Loop until a condition: the author can explain what makes their while loop stop, and predict the number of trips for a given reading"
+        - label: "A decision inside a loop: the author can trace which trips take the if branch and explain what % 3 has to do with it"
+        - label: "A loop inside a loop: the author can count how many times the inner block runs in total and explain what indentation decides"
+        - label: "The author described their process well, communicating confidence and understanding of their own code"
+  - type: textarea
+    attributes:
+      label: The Good, The Bad, The Ugly
+      description: Write a short note with at least 3 aspects done well, and 3 aspects on which the code could be improved
+      value: |
+        #### Positives
+        1.
+        2.
+        3.
+        #### Improvements
+        1.
+        2.
+        3.
+    validations:
+      required: true

@@ -1,0 +1,87 @@
+# Fifteen checks: six run your program, seven read src/main.py, two read docs/summary.md.
+# The six program checks read only the field log at the end of a run, or count how many
+# times the lantern came on, never the story lines. Log values forgive extra spaces, letter
+# case, and a missing colon. Each program check stops after five seconds: a loop that never
+# ends fails the check instead of hanging.
+
+- description: "[CALL] The field log names you: TODO 1 saves the name, and TODO 11 prints FIELD LOG with it"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fireflies.py::test_program_runs_and_log_names_you
+
+- description: "[CALL] 4 logs 4 flashes, 12 logs 10, and 0 logs 1: the if/elif pulls the count back to the nearest edge before the loop"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fireflies.py::test_flash_count_is_held_between_one_and_ten
+
+- description: "[CALL] Asking for 7 flashes lights the lantern three more times than asking for 4: led.on() goes inside the loop, once per trip"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fireflies.py::test_lantern_flashes_once_per_trip
+
+- description: "[DARK] A reading of 70 takes five checks, 30 takes one, and 20 or 15 take none: the while tests `reading > 20` before every trip, and the subtraction happens inside the loop"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fireflies.py::test_checks_until_dark_counts_the_trips
+
+- description: "[ANSWER] A pattern of 9 logs 3 long flashes, 7 logs 2, and 2 logs 0: count from 1 and test `% 3 == 0` inside the loop"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fireflies.py::test_every_third_flash_is_long
+
+- description: "[SOS] One more repeat lights the lantern nine more times: the three letter loops sit inside the outer loop, not after it"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fireflies.py::test_sos_is_nine_flashes_per_repeat
+
+- description: "[CODE] At least three for loops over range(...): Stage One, Stage Three, and Stage Four each need one"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_at_least_three_for_loops_over_range
+
+- description: "[CODE] One while loop: Stage Two repeats until the reading is 20 or lower, and the count is not known in advance"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_one_while_loop
+
+- description: "[CODE] An if inside a loop: Stage Three decides on every trip whether this flash is held long"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_an_if_inside_a_loop
+
+- description: "[CODE] A loop inside a loop: Stage Four sends the three letters of SOS inside the loop that repeats the signal"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_a_loop_inside_a_loop
+
+- description: "[CODE] Loops and decisions only, no list anywhere: every stage is a count, so nothing here needs `[` `]`"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_no_lists
+
+- src/main.py:
+  - description: "[CODE] No TODO markers remain: delete each TODO comment once its code is written, including Author"
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: "[CODE] At least six comments: explain why a loop counts from 1, or why a line sits inside the loop rather than after it"
+    check: CountSingleLineComments
+    options:
+      language: Python
+      count: 6
+      exact: false
+
+- docs/summary.md:
+  - description: "[SUMMARY] No TODO markers remain in docs/summary.md: replace each one with your answer, then delete it"
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: "[SUMMARY] At least 150 words in docs/summary.md: answer every question in full sentences"
+    check: CountFileWords
+    options:
+      count: 150
+      exact: false
