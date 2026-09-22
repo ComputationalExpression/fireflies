@@ -49,7 +49,9 @@ def run(capsys, **changes):
     out, err = capsys.readouterr()
     assert err == "", "the program wrote to the error stream:\n" + err
     lit = len(recorder.calls("machine.Pin.on"))
-    lit += sum(1 for args, _ in recorder.calls("machine.Pin.value") if len(args) > 1 and args[1])
+    # mockro binds the instance twice when it records, so value(1) arrives as
+    # (pin, pin, 1) and the argument is the third slot.
+    lit += sum(1 for args, _ in recorder.calls("machine.Pin.value") if len(args) > 2 and args[2])
     return out, answers, lit
 
 
