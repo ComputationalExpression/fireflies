@@ -6,11 +6,11 @@
 |Due |See the [course schedule](https://computationalexpression.com/schedule/) |
 |Progress |[![Grade](../../actions/workflows/main.yml/badge.svg?branch=main)](../../actions/workflows/main.yml) |
 
-Seven miles from campus, the college owns 283 acres of forest, ponds and wetland called the
+Seven miles from campus, there are 283 acres of forest, ponds and wetland called the
 Bousson Environmental Research Reserve. On a June night you are at the edge of one of its ponds,
 counting fireflies. Fireflies talk in flash patterns, and a lantern flashed in the right rhythm
 gets an answer. Your Raspberry Pi Pico 2 W's built-in LED is that lantern. Every stage repeats
-something, and a loop is how you say it once.
+something, and a loop is how you say code the repetition once.
 
 ## Contents
 
@@ -59,8 +59,7 @@ before it is due.
 
 ## The four stages
 
-Everything this lab asks for is covered by Friday of Week 5. There is no list anywhere in it:
-each stage is a count or a condition, and loops and decisions are all you need.
+Everything this lab asks for is covered by Friday of Week 5. 
 
 **The story is yours to change.** Every message the program prints is your wording, and you
 may rewrite the night at the pond however you like. Two things stay fixed, because the
